@@ -1,0 +1,12 @@
+select * from EMP;
+select MGR, MAX(SAL) from EMP where mgr is not null group by MGR; 
+select emp.ENAME, emp.HIREDATE from EMP emp where emp.DEPTNO IN (select emp2.DEPTNO from EMP emp2 where emp2.ENAME = 'ALLEN') and emp.ENAME != 'ALLEN';
+select emp.EMPNO, emp.ENAME from EMP emp where emp.SAL > (select AVG(SAL) from EMP emp2) order by SAL desc;
+select emp.EMPNO, emp.ENAME, emp.MGR, emp.SAL from EMP emp where emp.SAL < (select AVG(SAL) from EMP emp2) order by SAL desc;
+select emp.EMPNO, emp.ENAME from EMP emp where emp.DEPTNO in (select emp2.DEPTNO from EMP emp2 where emp2.ENAME like '%T%');
+select emp.EMPNO, emp.DEPTNO, emp.JOB from EMP emp LEFT OUTER JOIN DEPT dept ON emp.DEPTNO = dept.DEPTNO where emp.DEPTNO in (select dept2.DEPTNO from DEPT dept2 where dept2.LOC = 'DALLAS');
+select emp.ENAME, emp.SAL from EMP emp where emp.MGR in (select emp2.EMPNO from EMP emp2 where emp2.ENAME = 'KING');
+select emp.DEPTNO, dept.DNAME, emp.JOB from EMP emp LEFT OUTER JOIN DEPT dept ON emp.DEPTNO = dept.DEPTNO where dept.DNAME = 'SALES';
+select emp.EMPNO, emp.DEPTNO, emp.JOB from EMP emp LEFT OUTER JOIN DEPT dept ON emp.DEPTNO = dept.DEPTNO where emp.DEPTNO in (select dept2.DEPTNO from DEPT dept2 where dept2.LOC != 'DALLAS');
+select emp.EMPNO, emp.ENAME, emp.SAL from EMP emp where emp.SAL > (select AVG(SAL) from EMP)
+and emp.DEPTNO in (select distinct emp2.DEPTNO from EMP emp2 where emp2.ENAME like '%T%');​
